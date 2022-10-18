@@ -38,12 +38,19 @@ namespace BestBuyHiringManagerApp.Controllers
 
         public IActionResult InsertEmployee(Employee employeeToInsert)
         {
-            
+            var employ = repo.AddEmployee(employeeToInsert);
+            return View(employ);
         }
 
         public IActionResult InsertEmployeeToDatabase(Employee employeeToInsert)
         {
             repo.InsertEmployee(employeeToInsert);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult DeleteEmployee(Employee employee)
+        {
+            repo.DeleteEmployee(employee);
             return RedirectToAction("Index");
         }
     }

@@ -27,14 +27,14 @@ namespace BestBuyHiringManagerApp
 
         public void InsertEmployee(Employee employeeToInsert)
         {
-            _conn.Execute("INSERT INTO employeess (FirstName, MiddleInitial, LastName, EmailAddress, PhoneNumber, Title, DateOfBirth) VALUES (@FirstName, @MiddleInitial, @LastName, @EmailAddress, @PhoneNumber, @Title, @DateOfBirth);",
+            _conn.Execute("INSERT INTO employees (FirstName, MiddleInitial, LastName, EmailAddress, PhoneNumber, Title, DateOfBirth) VALUES (@FirstName, @MiddleInitial, @LastName, @EmailAddress, @PhoneNumber, @Title, @DateOfBirth);",
                 new { FirstName = employeeToInsert.FirstName, MiddleInitial = employeeToInsert.MiddleInitial, LastName = employeeToInsert.LastName, EmailAddress = employeeToInsert.EmailAddress, PhoneNumber = employeeToInsert.PhoneNumber, Title = employeeToInsert.Title, DateOfBirth = employeeToInsert.DateOfBirth });
 
         }
-        public Employee AddEmployee()
+        public Employee AddEmployee(Employee employee)
         {
-            var employee = new Employee();
-            return employee;
+            var employ = new Employee();
+            return employ;
         }
 
 
@@ -42,6 +42,12 @@ namespace BestBuyHiringManagerApp
         {
             _conn.Execute("update employees set FirstName = @FirstName, MiddleInitial = @MiddleInitial, LastName = @LastName, EmailAddress = @EmailAddress, PhoneNumber = @PhoneNumber,Title = @Title, DateOfBirth = @DateOfBirth where EmployeeID = @id",
                 new { FirstName = employee.FirstName, MiddleInitial = employee.MiddleInitial, LastName = employee.LastName, EmailAddress = employee.EmailAddress, PhoneNumber = employee.PhoneNumber, Title = employee.Title, DateOfBirth = employee.DateOfBirth, id = employee.EmployeeID});
+        }
+
+        public void DeleteEmployee(Employee employee)
+        {
+            _conn.Execute("delete from employees where employeeID = @id;", new { id = employee.EmployeeID });
+
         }
     }
 }
